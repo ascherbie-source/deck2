@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "playwright-chromium": "^1.57.0"
-  }
+  },
+  "scripts": {
+  "build:pages": "slidev build --base \"/deck2/\""
+}
 }
