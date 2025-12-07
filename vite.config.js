@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 
 export default {
-  base: "/deck1/",
+  base: "/deck2/",
 }
 
