@@ -17,6 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Give Node more heap for Vite/Rollup during Slidev build
+      NODE_OPTIONS: --max-old-space-size=6144
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,13 +28,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
+        # If you don't have package-lock.json, use: npm install
 
       - name: Build (Slidev)
-        run: npx slidev build --base "/"
+        # For a project site; for user site use: --base "/"
+        run: npx slidev build --base "/${{ github.event.repository.name }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
